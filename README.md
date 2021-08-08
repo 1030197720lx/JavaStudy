@@ -79,3 +79,4 @@ Spring定义了7种传播行为
 3、在Mapper映射文件中使用resultMap自定义映射规则。即把每个字段和数据库中字段一一对应。  
 
 五、linux常用命令
+service 服务名 start
