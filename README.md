@@ -29,6 +29,7 @@ Java知识学习</br>
 this在构造器里表示的是正在创建的对象，所以如果创建的是子类，就会执行子类重写的方法。而不会执行父类对应的方法  
 final方法、静态方法 、private 等在子类中不可见的方法不可以被重写。  
 
+
 第三天 参数传递、递归与迭代、成员变量和局部变量  
 1、基础数据类型、包装类的不可变性，不会根据方法内的变动改变参数，对象、数组传递的是地址，因此修改的对象就是传递进去的对象，会根据方法内改变。  
 2、递归：代码简洁、易读，但是空间消耗严重   
@@ -80,3 +81,9 @@ Spring定义了7种传播行为
 
 五、linux常用命令
 service 服务名 start
+
+六、git常用命令
+创建分支 git brance <分支名>  git brance -v <分支名>
+切换分支 git checkout <分支名>  一步完成 git checkout -b <分支名>
+合并分支 先切换到主干  git checkout master   git merge <分支名>
+删除分支 先切换到主干  git checkout master   git brance -D <分支名>
