@@ -28,3 +28,54 @@ Java知识学习</br>
 非静态方法前面其实有一个默认的对象this  
 this在构造器里表示的是正在创建的对象，所以如果创建的是子类，就会执行子类重写的方法。而不会执行父类对应的方法  
 final方法、静态方法 、private 等在子类中不可见的方法不可以被重写。  
+
+第三天 参数传递、递归与迭代、成员变量和局部变量  
+1、基础数据类型、包装类的不可变性，不会根据方法内的变动改变参数，对象、数组传递的是地址，因此修改的对象就是传递进去的对象，会根据方法内改变。  
+2、递归：代码简洁、易读，但是空间消耗严重   
+   迭代，代码易读，  
+3、成员变量包括全局变量和实例变量 全局变量是在类加载时载入，全局唯一，修改会作用全局，实例变量是只在当前实例生效，局部变量则只在局部生效，比如方法中的变量，方法调用结束就释放掉了，不会影响成员变量。  
+
+第四天 Spring
+一、Sring Bean的作用域
+可以通过scope属性设置bean的作用域，已决定该bean是单实例还是多实例  
+1、singleton 单例，在SpringIOC容器中只有一个Bean实例，默认作用域  
+2、prototype 每次调用getBean都会生成一个新的实例  
+3、request 每个http请求都会生成一个实例，该请求共享该实例，仅适用于WebApplicationContext环境  
+4、session 每个session会话都会生成一个实例，该会话共享该实例，仅适用于WebApplicationContext环境  
+
+二、Spring支持的常用数据库事务传播属性和事务隔离级别
+当事务方法被另一个事务方法调用时，该方法是使用调用方法的事务还是开启新的事务
+Spring定义了7种传播行为
+1、required 如果有事务在运行，就使用该事务
+2、required_new 如果有事务在运行，挂起该事务，启动新事务，在自己的事务内运行
+3、support 如果有事务在运行，当前方法在该事务内运行，否则可以不运行在事务内
+4、not_support 当前方法不应该运行在事务内，如果有运行的事务，挂起
+5、mandatory 当前方法必须运行在事务内，如果没有正在运行的事务，抛出异常
+6、never 当前的方法不应该在运行在事务内，如果有运行的事务，抛出异常
+7、nested 如果有事务在运行，当前方法应该在当前事务的嵌套事务运行，否则新建一个事务，并在自己的事务内运行
+使用：在需要添加事务的方法上加上注释 @Transactional(propagation = Propagation.REQUIRES_NEW)即可，假如使用的是requires_new,则每次调用该方法都会建立一个事务，调用完成后事务提交  
+
+三、Spring Mvc的工作流程
+1、客户端发送请求到中央控制器（DispatcherServlet）  
+2、中央控制器(DispatcherServlet)根据请求信息调⽤处理器映射器(HandlerMapping) ，解析请求对应的 Handler 。  
+3、解析到对应的 Handler （也就是我们平常说的 Controller 控制器）后，开始由 HandlerAdapter 适配器处理。
+4、HandlerAdapter 会根据 Handler 来调⽤真正的处理器开处理请求，并处理相应的业务逻辑。
+5、处理器处理完业务后，会返回⼀个 ModelAndView 对象， Model 是返回的数据对象， View 是个逻辑上的 View 。
+6、ViewResolver 会根据逻辑 View 查找实际的 View 。
+7、DispaterServlet 把返回的 Model 传给 View （视图渲染）。
+8、把 View 返回给请求者（浏览器）
+
+总结：中央控制器（DispatcherServlet）主要做了
+1、客户端发送的请求接受；  
+2、根据发送来的请求去处理器映射器（handlemapping）拿到对应的handleExceptionChain,包含处理器拦截器和处理器对象;  
+3、拿到handleExceptionChain之后去找到处理器适配器（handleAdapter）调用（handle），调用完之后返回ModelAndView;
+4、调用视图解析器（viewResolver）返回view
+5、渲染视图，将模型数据填充至request域；返回给客户端。
+![img.png](img.png)
+
+四、Mybatis实体类和数据库字段不一致  
+1、查询时取别名  
+2、在全局配置中开启驼峰命名规则，会把下划线变成驼峰命名  
+3、在Mapper映射文件中使用resultMap自定义映射规则。即把每个字段和数据库中字段一一对应。  
+
+五、linux常用命令
